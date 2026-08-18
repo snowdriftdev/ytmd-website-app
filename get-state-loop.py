@@ -4,8 +4,7 @@ import time
 import logging
 import json
 
-logPath = "./log.txt"
-logging.basicConfig(level=logging.DEBUG, filename='log.txt')
+logging.basicConfig(level=logging.DEBUG, filename='logs/state-loop.log')
 
 token = os.environ.get("YTMD_APP_TOKEN")
 if token is None:
