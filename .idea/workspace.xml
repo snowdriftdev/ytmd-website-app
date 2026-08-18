@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3201f562-4f0e-401f-9779-11f97749c33f" name="Changes" comment="initial commit, add a token getter">
-      <change afterPath="$PROJECT_DIR$/get-state-loop.py" afterDir="false" />
+    <list default="true" id="3201f562-4f0e-401f-9779-11f97749c33f" name="Changes" comment="update log location">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/get-state-loop.py" beforeDir="false" afterPath="$PROJECT_DIR$/get-state-loop.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,6 +66,11 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Carter\PycharmProjects\ytmd-webapp\logs" />
+    </key>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -82,7 +87,7 @@
       <option name="presentableId" value="Default" />
       <updated>1787090558208</updated>
       <workItem from="1787090559222" duration="1677000" />
-      <workItem from="1787092278807" duration="1069000" />
+      <workItem from="1787092278807" duration="3121000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit, add a token getter">
       <option name="closed" value="true" />
@@ -100,7 +105,23 @@
       <option name="project" value="LOCAL" />
       <updated>1787091984161</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="add a simple script to get the players state on a loop and export it to a log file">
+      <option name="closed" value="true" />
+      <created>1787093379654</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1787093379654</updated>
+    </task>
+    <task id="LOCAL-00004" summary="update log location">
+      <option name="closed" value="true" />
+      <created>1787093479322</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1787093479322</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -108,10 +129,12 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="initial commit, add a token getter" />
-    <option name="LAST_COMMIT_MESSAGE" value="initial commit, add a token getter" />
+    <MESSAGE value="add a simple script to get the players state on a loop and export it to a log file" />
+    <MESSAGE value="update log location" />
+    <option name="LAST_COMMIT_MESSAGE" value="update log location" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/ytmd_webapp$get_state_loop.coverage" NAME="get-state-loop Coverage Results" MODIFIED="1787093146697" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/ytmd_webapp$get_state_loop.coverage" NAME="get-state-loop Coverage Results" MODIFIED="1787095374338" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/ytmd_webapp$get_auth.coverage" NAME="get-auth Coverage Results" MODIFIED="1787091600780" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
