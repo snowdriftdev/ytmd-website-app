@@ -1,0 +1,157 @@
+Index: item-display.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/item-display.py b/item-display.py
+new file mode 100644
+--- /dev/null	(date 1787180315321)
++++ b/item-display.py	(date 1787180315321)
+@@ -0,0 +1,26 @@
++import getstateinfo as gsi
++from flask import Flask, Response
++import os
++import json
++import time
++from dotenv import load_dotenv
++load_dotenv()
++
++
++def get_current_song():
++    currentSongData = gsi.parseStateForActiveSong(gsi.getState())
++    return currentSongData
++
++
++def event_stream():
++    last_value = None
++    while True:
++        value = get_current_song()
++        if value != last_value:
++            yield (f"data: {json.dumps(value)}\n\n")
++            last_value = value
++
++def stream():
++    return Response(event_stream(), mimetype="text/event-stream")
++
++#TODO: make the website interface (claude --resume)
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"3201f562-4f0e-401f-9779-11f97749c33f\" name=\"Changes\" comment=\"add parsing for the json response so it only returns active song rather than the whole queue\">\r\n      <change afterPath=\"$PROJECT_DIR$/.gitignore\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/item-display.py\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/ytmdcommands.py\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/get-state-loop.py\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/getstateinfo.py\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/get-token.py\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/get-token.py\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Python Script\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"GitHubPullRequestSearchHistory\">{\r\n  &quot;lastFilter&quot;: {\r\n    &quot;state&quot;: &quot;OPEN&quot;,\r\n    &quot;assignee&quot;: &quot;snowdriftdev&quot;\r\n  }\r\n}</component>\r\n  <component name=\"GithubPullRequestsUISettings\">{\r\n  &quot;selectedUrlAndAccountId&quot;: {\r\n    &quot;url&quot;: &quot;https://github.com/snowdriftdev/ytmd-website-app.git&quot;,\r\n    &quot;accountId&quot;: &quot;544bf790-ea09-4295-89da-e47407899de4&quot;\r\n  }\r\n}</component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 5,\r\n  &quot;fromUser&quot;: false\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"3I6giBKZrxMxElF4I31JAbmL6qf\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"ASKED_SHARE_PROJECT_CONFIGURATION_FILES\": \"true\",\r\n    \"ModuleVcsDetector.initialDetectionPerformed\": \"true\",\r\n    \"Python.get-auth.executor\": \"Run\",\r\n    \"Python.get-state-loop.executor\": \"Run\",\r\n    \"Python.get-token.executor\": \"Run\",\r\n    \"Python.getstateloop.executor\": \"Run\",\r\n    \"Python.item-display.executor\": \"Run\",\r\n    \"Python.ytmdcommands.executor\": \"Run\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252\": \"true\",\r\n    \"RunOnceActivity.git.unshallow\": \"true\",\r\n    \"RunOnceActivity.typescript.service.memoryLimit.init\": \"true\",\r\n    \"SHARE_PROJECT_CONFIGURATION_FILES\": \"true\",\r\n    \"ai.playground.ignore.import.keys.banner.in.settings\": \"true\",\r\n    \"git-widget-placeholder\": \"master\",\r\n    \"node.js.detected.package.eslint\": \"true\",\r\n    \"node.js.detected.package.tslint\": \"true\",\r\n    \"node.js.selected.package.eslint\": \"(autodetect)\",\r\n    \"node.js.selected.package.tslint\": \"(autodetect)\",\r\n    \"nodejs_package_manager_path\": \"npm\",\r\n    \"settings.editor.selected.configurable\": \"org.jetbrains.plugins.github.ui.GithubSettingsConfigurable\",\r\n    \"vue.rearranger.settings.migration\": \"true\"\r\n  }\r\n}]]></component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"MoveFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\Users\\Carter\\PycharmProjects\\ytmd-webapp\" />\r\n      <recent name=\"C:\\Users\\Carter\\PycharmProjects\\ytmd-webapp\\logs\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"SharedIndexes\">\r\n    <attachedChunks>\r\n      <set>\r\n        <option value=\"bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-PY-253.33813.50\" />\r\n        <option value=\"bundled-python-sdk-d4a74c56190c-6d6dccd035ac-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-253.33813.50\" />\r\n      </set>\r\n    </attachedChunks>\r\n  </component>\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"3201f562-4f0e-401f-9779-11f97749c33f\" name=\"Changes\" comment=\"\" />\r\n      <created>1787090558208</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1787090558208</updated>\r\n      <workItem from=\"1787090559222\" duration=\"1677000\" />\r\n      <workItem from=\"1787092278807\" duration=\"3810000\" />\r\n      <workItem from=\"1787096157148\" duration=\"3653000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"initial commit, add a token getter\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1787091888241</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1787091888241</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"initial commit, add a token getter\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1787091984161</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1787091984161</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"add a simple script to get the players state on a loop and export it to a log file\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1787093379654</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1787093379654</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"update log location\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1787093479322</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1787093479322</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"add parsing for the json response so it only returns active song rather than the whole queue\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1787095544748</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1787095544748</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"6\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"initial commit, add a token getter\" />\r\n    <MESSAGE value=\"add a simple script to get the players state on a loop and export it to a log file\" />\r\n    <MESSAGE value=\"update log location\" />\r\n    <MESSAGE value=\"add parsing for the json response so it only returns active song rather than the whole queue\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"add parsing for the json response so it only returns active song rather than the whole queue\" />\r\n  </component>\r\n  <component name=\"com.intellij.coverage.CoverageDataManagerImpl\">\r\n    <SUITE FILE_PATH=\"coverage/ytmd_webapp$get_token.coverage\" NAME=\"get-token Coverage Results\" MODIFIED=\"1787096042232\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"coverage.py\" COVERAGE_BY_TEST_ENABLED=\"false\" COVERAGE_TRACING_ENABLED=\"false\" WORKING_DIRECTORY=\"$PROJECT_DIR$\" />\r\n    <SUITE FILE_PATH=\"coverage/ytmd_webapp$get_state_loop.coverage\" NAME=\"get-state-loop Coverage Results\" MODIFIED=\"1787096178416\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"coverage.py\" COVERAGE_BY_TEST_ENABLED=\"false\" COVERAGE_TRACING_ENABLED=\"false\" WORKING_DIRECTORY=\"$PROJECT_DIR$\" />\r\n    <SUITE FILE_PATH=\"coverage/ytmd_webapp$item_display.coverage\" NAME=\"item-display Coverage Results\" MODIFIED=\"1787102142818\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"coverage.py\" COVERAGE_BY_TEST_ENABLED=\"false\" COVERAGE_TRACING_ENABLED=\"false\" WORKING_DIRECTORY=\"$PROJECT_DIR$\" />\r\n    <SUITE FILE_PATH=\"coverage/ytmd_webapp$ytmdcommands.coverage\" NAME=\"ytmdcommands Coverage Results\" MODIFIED=\"1787104370808\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"coverage.py\" COVERAGE_BY_TEST_ENABLED=\"false\" COVERAGE_TRACING_ENABLED=\"false\" WORKING_DIRECTORY=\"$PROJECT_DIR$\" />\r\n    <SUITE FILE_PATH=\"coverage/ytmd_webapp$get_auth.coverage\" NAME=\"get-auth Coverage Results\" MODIFIED=\"1787091600780\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"coverage.py\" COVERAGE_BY_TEST_ENABLED=\"false\" COVERAGE_TRACING_ENABLED=\"false\" WORKING_DIRECTORY=\"$PROJECT_DIR$\" />\r\n    <SUITE FILE_PATH=\"coverage/ytmd_webapp$getstateloop.coverage\" NAME=\"getstateloop Coverage Results\" MODIFIED=\"1787102366164\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"coverage.py\" COVERAGE_BY_TEST_ENABLED=\"false\" COVERAGE_TRACING_ENABLED=\"false\" WORKING_DIRECTORY=\"$PROJECT_DIR$\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision dbde206ebcf33cdb9daf94b9570c80c9956ec5eb)
++++ b/.idea/workspace.xml	(date 1787180338413)
+@@ -4,13 +4,10 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="3201f562-4f0e-401f-9779-11f97749c33f" name="Changes" comment="add parsing for the json response so it only returns active song rather than the whole queue">
+-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
++    <list default="true" id="3201f562-4f0e-401f-9779-11f97749c33f" name="Changes" comment="add README.md">
+       <change afterPath="$PROJECT_DIR$/item-display.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/ytmdcommands.py" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/get-state-loop.py" beforeDir="false" afterPath="$PROJECT_DIR$/getstateinfo.py" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/get-token.py" beforeDir="false" afterPath="$PROJECT_DIR$/get-token.py" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -22,6 +19,17 @@
+       <list>
+         <option value="Python Script" />
+       </list>
++    </option>
++  </component>
++  <component name="FlaskConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform)); sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo, NoAppException&#10;for module in [&quot;main.py&quot;, &quot;wsgi.py&quot;, &quot;app.py&quot;]:&#10;    try: locals().update(ScriptInfo(app_import_path=module, create_app=None).load_app().make_shell_context()); print(&quot;\nFlask App: %s&quot; % app.import_name); break&#10;    except NoAppException: pass">
++    <envs>
++      <env key="FLASK_APP" value="app" />
++    </envs>
++    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform)); sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo, NoAppException&#10;for module in [&quot;main.py&quot;, &quot;wsgi.py&quot;, &quot;app.py&quot;]:&#10;    try: locals().update(ScriptInfo(app_import_path=module, create_app=None).load_app().make_shell_context()); print(&quot;\nFlask App: %s&quot; % app.import_name); break&#10;    except NoAppException: pass" />
++    <option name="myEnvs">
++      <map>
++        <entry key="FLASK_APP" value="app" />
++      </map>
+     </option>
+   </component>
+   <component name="Git.Settings">
+@@ -65,12 +73,13 @@
+     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+     "ai.playground.ignore.import.keys.banner.in.settings": "true",
+     "git-widget-placeholder": "master",
++    "ignore.virus.scanning.warn.message": "true",
+     "node.js.detected.package.eslint": "true",
+     "node.js.detected.package.tslint": "true",
+     "node.js.selected.package.eslint": "(autodetect)",
+     "node.js.selected.package.tslint": "(autodetect)",
+     "nodejs_package_manager_path": "npm",
+-    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
++    "settings.editor.selected.configurable": "preferences.pluginManager",
+     "vue.rearranger.settings.migration": "true"
+   }
+ }]]></component>
+@@ -97,7 +106,10 @@
+       <updated>1787090558208</updated>
+       <workItem from="1787090559222" duration="1677000" />
+       <workItem from="1787092278807" duration="3810000" />
+-      <workItem from="1787096157148" duration="3653000" />
++      <workItem from="1787096157148" duration="4178000" />
++      <workItem from="1787105843835" duration="25000" />
++      <workItem from="1787179666806" duration="80000" />
++      <workItem from="1787179755438" duration="579000" />
+     </task>
+     <task id="LOCAL-00001" summary="initial commit, add a token getter">
+       <option name="closed" value="true" />
+@@ -139,7 +151,23 @@
+       <option name="project" value="LOCAL" />
+       <updated>1787095544748</updated>
+     </task>
+-    <option name="localTasksCounter" value="6" />
++    <task id="LOCAL-00006" summary="added a commands script to call from others and made slight name/path modifications to previous files">
++      <option name="closed" value="true" />
++      <created>1787104735069</created>
++      <option name="number" value="00006" />
++      <option name="presentableId" value="LOCAL-00006" />
++      <option name="project" value="LOCAL" />
++      <updated>1787104735069</updated>
++    </task>
++    <task id="LOCAL-00007" summary="add README.md">
++      <option name="closed" value="true" />
++      <created>1787104932832</created>
++      <option name="number" value="00007" />
++      <option name="presentableId" value="LOCAL-00007" />
++      <option name="project" value="LOCAL" />
++      <updated>1787104932832</updated>
++    </task>
++    <option name="localTasksCounter" value="8" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -150,7 +178,9 @@
+     <MESSAGE value="add a simple script to get the players state on a loop and export it to a log file" />
+     <MESSAGE value="update log location" />
+     <MESSAGE value="add parsing for the json response so it only returns active song rather than the whole queue" />
+-    <option name="LAST_COMMIT_MESSAGE" value="add parsing for the json response so it only returns active song rather than the whole queue" />
++    <MESSAGE value="added a commands script to call from others and made slight name/path modifications to previous files" />
++    <MESSAGE value="add README.md" />
++    <option name="LAST_COMMIT_MESSAGE" value="add README.md" />
+   </component>
+   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+     <SUITE FILE_PATH="coverage/ytmd_webapp$get_token.coverage" NAME="get-token Coverage Results" MODIFIED="1787096042232" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+Index: .gitignore
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>/.env\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.gitignore b/.gitignore
+--- a/.gitignore	(revision dbde206ebcf33cdb9daf94b9570c80c9956ec5eb)
++++ b/.gitignore	(date 1787104991373)
+@@ -1,1 +1,2 @@
+ /.env
++/logs/
