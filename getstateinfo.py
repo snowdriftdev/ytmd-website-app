@@ -3,6 +3,8 @@ import os
 import time
 import logging
 import json
+from dotenv import load_dotenv
+load_dotenv()
 
 logging.basicConfig(level=logging.DEBUG, filename='logs/state-loop.log')
 
@@ -14,11 +16,13 @@ if token is None:
 # adds the auth header
 headers = {"Authorization": f"{token}"}
 
+# this should be called in most things that require the current state
+# TODO: implement a caching system with datetime (like a 5s cache with automated timing offset calculation)
 def getState():
     currentState = requests.get("http://localhost:9863/api/v1/state", headers=headers)
     #print(currentState.text)
     # unminify the json and export it to the log file
-    #logging.debug(json.dumps(json.loads(currentState.text), indent=4))
+    # logging.debug(json.dumps(json.loads(currentState.text), indent=4))
     return(currentState.text)
 
 def parseStateForActiveSong(state):
@@ -31,8 +35,17 @@ def parseStateForActiveSong(state):
     print("ERROR: No current song found.")
     return("")
 
+def parseStateForTrackStatus(state):
+    jsonState = json.loads(state)
+    # -1 Unknown, 0 Paused, 1 Playing, 2 Buffering | Returns the current track status
+    return jsonState["player"]["trackState"]
 
-while True:
-    # converts the result to a formatted json dump and prints it
-    print(json.dumps(parseStateForActiveSong(getState()), indent=4))
-    time.sleep(5)
+def parseStateForTrack(state):
+    jsonState = json.loads(state)
+    # returns how long in seconds the player is through the video/song
+    return jsonState["player"]["videoProgress"]
+
+# while True:
+#     # converts the result to a formatted json dump and prints it
+#     print(json.dumps(parseStateForActiveSong(getState()), indent=4))
+#     time.sleep(5)

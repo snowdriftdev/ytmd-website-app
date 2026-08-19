@@ -1,7 +1,9 @@
 import requests
+import os
+from dotenv import load_dotenv, set_key
+load_dotenv()
 
-
-debug = False
+debug = os.environ.get("DEBUG")
 
 appID="ytm-webapp"
 appName="My Website Application"
@@ -15,4 +17,5 @@ if debug:(print(codeRequest.json()))
 tokenRequest = requests.post("http://localhost:9863/api/v1/auth/request", json={"appId": appID, "code": str(codeRequest.json()["code"])})
 if debug:(print(tokenRequest.json()))
 
-print(f"New Token: {tokenRequest.json()["token"]}")
+print(f"New Token saved to .env: {tokenRequest.json()["token"]}")
+set_key(dotenv_path=".env", key_to_set="YTMD_APP_TOKEN", value_to_set=tokenRequest.json()["token"])
