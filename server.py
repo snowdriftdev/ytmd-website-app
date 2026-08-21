@@ -1,37 +1,27 @@
-from flask import Flask, Response
+from flask import Flask, Response, render_template, request
 import time
 import json
 import socketio
 import os
 import threading
+import ytmdcommands as cmd
 
 from dotenv import load_dotenv
 load_dotenv()
 
 sio = socketio.Client()
 
-@sio.on("state-update")
+@sio.on("state-update", namespace="/api/v1/realtime")
 def on_state_update(data):
-    print(data)
-
-
-@sio.on("connect")
-def on_connect():
-    print("connected to YTMD")
-
-@sio.on("connect_error")
-def on_connect_error(data):
-    print(f"connection failed: {data}")
-
-@sio.on("disconnect")
-def on_disconnect():
-    print("disconnected")
+    global latest_state
+    latest_state = data
 
 def start_socketio():
     sio.connect(
     "http://127.0.0.1:9863",
         transports=["websocket"],
         auth={"token": os.environ.get("YTMD_APP_TOKEN")},
+        namespaces=["/api/v1/realtime"]
     )
 
     sio.wait()
@@ -42,7 +32,7 @@ app = Flask(__name__)
 
 def event_stream():
     while True:
-        payload = json.dumps({"title": "Test Song", "artist": "Test Artist"})
+        payload = json.dumps(latest_state)
         yield f"data: {payload}\n\n"
         time.sleep(2)
 
@@ -50,9 +40,24 @@ def event_stream():
 def events():
     return Response(event_stream(), mimetype = "text/event-stream")
 
-@app.route("/")
-def index():
-    return "<h1>hello</h1>"
+@app.route("/music")
+def music_page():
+    return render_template("music.html")
+
+@app.route("/command", methods=["POST"])
+def command():
+    body = request.get_json()
+    command_name = body.get("command")
+    commands = {
+        "toggle_play_pause": cmd.toggle_play_pause,
+        "next_song": cmd.next_song,
+        "previous_song": cmd.previous_song,
+    }
+
+    if command_name in commands:
+        commands[command_name]()
+        return "", 204
+    return "", 400
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, use_reloader=False)

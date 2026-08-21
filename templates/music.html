@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Control my music player!</title>
+</head>
+<body>
+    <img id="album-artwork" src="" />
+    <span id="song-title"></span>
+    <span id="artist-name"></span>
+    <progress id="progress" value="0" max="100"></progress>
+
+    <button id="btn-prev">&lt;</button>
+    <buttom id="btn-play-pause">Play/Pause</buttom>
+    <button id="btn-next">&gt;</button>
+
+    <script>
+        const source = new EventSource("/events");
+        source.onmessage = (event) => {
+            // update all the current video/track state info from the websocket
+            const data = JSON.parse(event.data);
+            if(!data.video) return;
+            document.getElementById("album-artwork").src = data.video.thumbnails.at(-1).url;
+            document.getElementById("song-title").textContent = data.video.title;
+            document.getElementById("artist-name").textContent = data.video.author;
+            document.getElementById("progress").value = data.player.videoProgress;
+            document.getElementById("progress").max = data.video.durationSeconds;
+        }
+
+        async function sendCommand(command) {
+            await fetch("/command", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({command})
+            })
+        }
+
+        document.getElementById("btn-play-pause").addEventListener("click", () => {
+            sendCommand("toggle_play_pause");
+        });
+        document.getElementById("btn-next").addEventListener("click", () => {
+            sendCommand("next_song")
+        })
+        document.getElementById("btn-prev").addEventListener("click", () => {
+            sendCommand("previous_song")
+        })
+    </script>
+</body>
+</html>
