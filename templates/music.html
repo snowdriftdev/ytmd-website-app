@@ -3,16 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <title>Control my music player!</title>
+    <meta name="darkreader-lock">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: transparent;
+            background: black;
+        }
+        #album-artwork {
+            width: 300px;
+            height: 300px;
+            object-fit: contain;
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            background-image: var(--bg-art);
+            background-size: cover;
+            filter: blur(45px);
+            transform: scale(1.3);
+            opacity: 0.6;
+        }
+        #panel {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: white;
+            padding: 32px;
+            border-radius: 16px;
+            background: rgba(20,20,20,0.3)
+
+        }
+
+    </style>
 </head>
 <body>
-    <img id="album-artwork" src="" />
-    <span id="song-title"></span>
-    <span id="artist-name"></span>
-    <progress id="progress" value="0" max="100"></progress>
+    <div id="panel">
+        <img id="album-artwork" src="" />
+        <span id="song-title"></span>
+        <span id="artist-name"></span>
+        <progress id="progress" value="0" max="100"></progress>
 
-    <button id="btn-prev">&lt;</button>
-    <buttom id="btn-play-pause">Play/Pause</buttom>
-    <button id="btn-next">&gt;</button>
+        <button id="btn-prev">&lt;</button>
+        <button id="btn-play-pause">Play/Pause</button>
+        <button id="btn-next">&gt;</button>
+    </div>
 
     <script>
         const source = new EventSource("/events");
@@ -25,6 +66,7 @@
             document.getElementById("artist-name").textContent = data.video.author;
             document.getElementById("progress").value = data.player.videoProgress;
             document.getElementById("progress").max = data.video.durationSeconds;
+            document.body.style.setProperty("--bg-art", `url("${data.video.thumbnails.at(-1).url}")`);
         }
 
         async function sendCommand(command) {

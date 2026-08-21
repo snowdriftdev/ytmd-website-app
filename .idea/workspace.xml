@@ -6,10 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="3201f562-4f0e-401f-9779-11f97749c33f" name="Changes" comment="">
       <changelist_data name="Carter" email="github@mail.snowdrift.sh" automatic="false" />
-      <change afterPath="$PROJECT_DIR$/templates/music.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/ytmd-webapp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ytmd-webapp.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/server.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/music.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/music.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,7 +128,9 @@
       <workItem from="1787261024556" duration="8008000" />
       <workItem from="1787324271568" duration="3202000" />
       <workItem from="1787340423778" duration="2477000" />
-      <workItem from="1787344935007" duration="1254000" />
+      <workItem from="1787344935007" duration="2108000" />
+      <workItem from="1787347303796" duration="231000" />
+      <workItem from="1787347583757" duration="4414000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit, add a token getter">
       <option name="closed" value="true" />
@@ -188,7 +188,15 @@
       <option name="project" value="LOCAL" />
       <updated>1787104932832</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="add the interaction website and make it technically usable- i definitely need to add css still tho lol">
+      <option name="closed" value="true" />
+      <created>1787346215155</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1787346215155</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -201,17 +209,18 @@
     <MESSAGE value="add parsing for the json response so it only returns active song rather than the whole queue" />
     <MESSAGE value="added a commands script to call from others and made slight name/path modifications to previous files" />
     <MESSAGE value="add README.md" />
-    <option name="LAST_COMMIT_MESSAGE" value="add README.md" />
+    <MESSAGE value="add the interaction website and make it technically usable- i definitely need to add css still tho lol" />
+    <option name="LAST_COMMIT_MESSAGE" value="add the interaction website and make it technically usable- i definitely need to add css still tho lol" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/ytmd_webapp$get_state_loop.coverage" NAME="get-state-loop Coverage Results" MODIFIED="1787096178416" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/ytmd_webapp$ytmdcommands.coverage" NAME="ytmdcommands Coverage Results" MODIFIED="1787104370808" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/ytmd_webapp$server.coverage" NAME="server Coverage Results" MODIFIED="1787346010054" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/ytmd_webapp$server.coverage" NAME="server Coverage Results" MODIFIED="1787351433427" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/ytmd_website_app$server.coverage" NAME="server Coverage Results" MODIFIED="1787273079491" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/ytmd_webapp$item_display.coverage" NAME="item-display Coverage Results" MODIFIED="1787102142818" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/ytmd_webapp$get_auth.coverage" NAME="get-auth Coverage Results" MODIFIED="1787091600780" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/ytmd_website_app$get_token.coverage" NAME="get-token Coverage Results" MODIFIED="1787273019371" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/ytmd_webapp$getstateloop.coverage" NAME="getstateloop Coverage Results" MODIFIED="1787102366164" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/ytmd_webapp$get_token.coverage" NAME="get-token Coverage Results" MODIFIED="1787324509751" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/ytmd_webapp$get_token.coverage" NAME="get-token Coverage Results" MODIFIED="1787347727673" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
