@@ -90,3 +90,9 @@ def toggle_shuffle():
         requests.post("http://localhost:9863/api/v1/command", json={"command": "shuffle"}, headers=headers)
     except Exception as e:
         print(f"ERROR: {e}")
+
+def custom_song(song_id):
+    try:
+        requests.post("http://localhost:9863/api/v1/command", json={"command": "shuffle"}, headers=headers)
+    except Exception as e:
+        print(f"ERROR: {e}")

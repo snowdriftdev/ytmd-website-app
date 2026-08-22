@@ -11,7 +11,6 @@
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            background: transparent;
             background: black;
         }
         #album-artwork {
@@ -37,36 +36,58 @@
             color: white;
             padding: 32px;
             border-radius: 16px;
-            background: rgba(20,20,20,0.3)
+            background: rgba(20,20,20,0.3);
 
         }
+        button {
+            font-size: xxx-large;
+            color: white;
+            background: rgba(0,0,0,0);
+            border: transparent;
+            cursor: pointer;
+        }
+
 
     </style>
 </head>
 <body>
     <div id="panel">
+        <span style="font-size: x-large;">Currently Listening To:</span>
         <img id="album-artwork" src="" />
         <span id="song-title"></span>
         <span id="artist-name"></span>
-        <progress id="progress" value="0" max="100"></progress>
-
-        <button id="btn-prev">&lt;</button>
-        <button id="btn-play-pause">Play/Pause</button>
-        <button id="btn-next">&gt;</button>
+        <div id="progress-container">
+            <span id="current-progress">0:00</span>
+            <progress id="progress" value="0" max="100"></progress>
+            <span id="total-duration">0:00</span>
+        </div>
+        <div id="song-controls-container">
+            <button id="btn-prev">⏮</button>
+            <button id="btn-play-pause">⏯</button>
+            <button id="btn-next">⏭</button>
+        </div>
     </div>
 
     <script>
+        function formatTime(seconds) {
+            return String(Math.floor(seconds / 60)) + ":" + String(Math.floor(seconds % 60)).padStart(2, "0");
+        }
+
         const source = new EventSource("/events");
         source.onmessage = (event) => {
             // update all the current video/track state info from the websocket
             const data = JSON.parse(event.data);
             if(!data.video) return;
+            const isPlaying = data.player.trackState === 1;
+            document.getElementById("btn-play-pause").textContent = isPlaying ? "⏸" : "▶";
             document.getElementById("album-artwork").src = data.video.thumbnails.at(-1).url;
             document.getElementById("song-title").textContent = data.video.title;
             document.getElementById("artist-name").textContent = data.video.author;
             document.getElementById("progress").value = data.player.videoProgress;
             document.getElementById("progress").max = data.video.durationSeconds;
             document.body.style.setProperty("--bg-art", `url("${data.video.thumbnails.at(-1).url}")`);
+            document.getElementById("current-progress").textContent = formatTime(data.player.videoProgress);
+            document.getElementById("total-duration").textContent = formatTime(data.video.durationSeconds)
         }
 
         async function sendCommand(command) {
